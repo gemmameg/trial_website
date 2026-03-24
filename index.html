@@ -2,95 +2,62 @@
 <!DOCTYPE html>
 
 <style>
-    * {
+   * {
   padding: 0;
   margin: 0;
 }
 
+/* NAV */
 nav {
   position: fixed;
   top: 0;
   right: 0;
   width: 100%;
   display: flex;
-  justify-content: flex-end; 
-  z-index: 1000;
-  margin: 0px;
+  justify-content: flex-end;
   background: #f9f9f9;
-  padding: 0px;
-  .menuItems {
-    list-style: none;
-    display: flex;
-
-    li {
-      margin: 25px;
-
-      a {
-        text-decoration: none;
-        color: #8f8f8f;
-        font-size: 24px;
-        font-weight: 400;
-        transition: all 0.5s ease-in-out;
-        position: relative;
-        text-transform: uppercase;
-
-        &::before {
-          content: attr(data-item);
-          transition: 0.5s;
-          color: #8254ff;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          width: 0;
-          overflow: hidden;
-        }
-
-        &:hover {
-          &::before {
-            width: 100%;
-            transition: all 0.5s ease-in-out;
-          }
-        }
-      }
-    }
-  }
 }
-   body{
-        text-decoration: none;
-        font-size: 24px;
-        font-weight: 400;
-      
-        p{
-           display: flex;
-           width: 100%;
-           justify-content: center;
-           align-items: top;
-           position: fixed;
-           top: 100;
-           min-height: 100vh;
-           font-family: Hack, monospace;
-        }
-      
-      .anat{
-        display: flex;              
-        justify-content: center;    
-        gap: 20px;                  
-        .anat a {
-         width: 150px;   /* controls size */
-         }
 
-        .anat img {
-         width: 100%;
-         height: auto; 
-        }
-      }
-        
-   }
-      
+.menuItems {
+  list-style: none;
+  display: flex;
+}
 
+.menuItems li {
+  margin: 25px;
+}
 
+.menuItems li a {
+  text-decoration: none;
+  color: #8f8f8f;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+/* TEXT */
+p {
+  text-align: center;
+  margin-top: 100px;
+  font-family: Hack, monospace;
+}
+
+/* IMAGE ROW */
+.anat {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+.anat a {
+  width: 150px;   /* controls size */
+}
+
+.anat img {
+  width: 100%;    /* fills the box */
+  height: auto;
+  display: block;
+}
 </style>
 
   
