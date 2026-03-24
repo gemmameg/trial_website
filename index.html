@@ -1,21 +1,117 @@
 <html>
 <!DOCTYPE html>
-<html>
-<head>
-<title>Anatomijas spēle</title>
-</head>
+<div>Filling the text on hover</div>
+<p data-item='Rohit'>Rohit</p>
+<style>
+    * {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 100vh;
+  font-family: Hack, monospace;
+}
+
+div {
+  color: #727272;
+  text-align: center;
+}
+
+p {
+  margin: 16px;
+  font-size: 96px;
+  color: #ccc;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all 1s ease-in-out;
+  position: relative;
+
+  &::before {
+    content: attr(data-item);
+    transition: all 1s ease-in-out;
+    color: #8254ff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 0;
+    overflow: hidden;
+  }
+
+  &:hover {
+    &::before {
+      width: 100%;
+    }
+  }
+}
+
+nav {
+  margin: 25px;
+  background: #f9f9f9;
+  padding: 16px;
+  .menuItems {
+    list-style: none;
+    display: flex;
+
+    li {
+      margin: 50px;
+
+      a {
+        text-decoration: none;
+        color: #8f8f8f;
+        font-size: 24px;
+        font-weight: 400;
+        transition: all 0.5s ease-in-out;
+        position: relative;
+        text-transform: uppercase;
+
+        &::before {
+          content: attr(data-item);
+          transition: 0.5s;
+          color: #8254ff;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 0;
+          overflow: hidden;
+        }
+
+        &:hover {
+          &::before {
+            width: 100%;
+            transition: all 0.5s ease-in-out;
+          }
+        }
+      }
+    }
+  }
+}
 
 
-    <a href="/3">Log in/Sign up</a>
-    <script src="static/majaslapa_1.js" defer></script>
+</style>
+<section>
+  <div>Real time example, Navbar:</div>
+  <nav>
+    <ul class="menuItems">
+      <li><a href='#' data-item='Home'>Home</a></li>
+      <li><a href='#' data-item='About'>About</a></li>
+      <li><a href='#' data-item='Projects'>Projects</a></li>
+      <li><a href='#' data-item='Blog'>Blog</a></li>
+      <li><a href='#' data-item='Contact'>Contact</a></li>
+    </ul>
+  </nav>
 
-<h2>Izvēlies anatomiju:</h2>
-<ul>
-  <li><a href="/2">Kauli</a></li>
-  <li><a href="/4">Muskuļi</a></li>
-  <li><a href="/5">Orgāni</a></li>
-</ul>
+</section>
 
-<a href="/6">Apskati savus rezultātus</a>
+
 
 </html>
