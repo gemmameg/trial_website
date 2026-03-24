@@ -1,7 +1,6 @@
 <html>
 <!DOCTYPE html>
-<div>Filling the text on hover</div>
-<p data-item='Rohit'>Rohit</p>
+
 <style>
     * {
   padding: 0;
@@ -18,39 +17,6 @@ body {
   font-family: Hack, monospace;
 }
 
-div {
-  color: #727272;
-  text-align: center;
-}
-
-p {
-  margin: 16px;
-  font-size: 96px;
-  color: #ccc;
-  text-transform: uppercase;
-  font-weight: 600;
-  transition: all 1s ease-in-out;
-  position: relative;
-
-  &::before {
-    content: attr(data-item);
-    transition: all 1s ease-in-out;
-    color: #8254ff;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 0;
-    overflow: hidden;
-  }
-
-  &:hover {
-    &::before {
-      width: 100%;
-    }
-  }
-}
 
 nav {
   margin: 25px;
@@ -99,14 +65,12 @@ nav {
 
 </style>
 <section>
-  <div>Real time example, Navbar:</div>
+  
   <nav>
     <ul class="menuItems">
-      <li><a href='#' data-item='Home'>Home</a></li>
-      <li><a href='#' data-item='About'>About</a></li>
-      <li><a href='#' data-item='Projects'>Projects</a></li>
-      <li><a href='#' data-item='Blog'>Blog</a></li>
-      <li><a href='#' data-item='Contact'>Contact</a></li>
+      <li><a href='#' data-item='Log In/Sign Up'>Home</a></li>
+      <li><a href='#' data-item='Rezultāti'>About</a></li>
+      
     </ul>
   </nav>
 
