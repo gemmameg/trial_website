@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Kauli</title>
+</head>
+<html>
+<head>
+<title>Kauli</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+#bone-name {
+  font-size: 24px;
+  margin-bottom: 20px;
+  min-height: 30px;
+}
+#game-container {
+  position: relative;
+  display: inline-block;
+}
+#skeleton {
+  width: 600px; /* 🔥 same size as working version */
+}
+.dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #888;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.dot.correct {
+  background-color: #4caf50;
+}
+.dot.wrong {
+  background-color: #f44336;
+}
+#score {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+</style>
+
+
+
+</head>
+
+<body>
+
+<h1>Kauli</h1>
+
+<button id="start-btn">Sākt spēli</button>
+<button id="study-btn">Mācīties terminus</button>
+<button id="end-study-btn" style="display:none;">Beigt mācīšanos</button>
+<button id="exit-btn" style="display:none;">Beigt spēli</button>
+
+<div id="bone-name"></div>
+
+<div id="game-container">
+  <!-- ✅ FIX: added id="skeleton" -->
+  <img id="skeleton"
+       src="https://image2url.com/r2/default/images/1774260108194-ec8efc66-1994-4e14-b90a-a5787acec0d6.png"
+       alt="image">
+</div>
+
+<div id="score"></div>
+
+<a href="index.html">Atgriezties</a>
+
+</body>
+</html>
