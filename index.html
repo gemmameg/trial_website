@@ -28,23 +28,24 @@ nav {
 }
 
 .menuItems li a {
+  position: relative;
+  display: inline-block;
   text-decoration: none;
-  color: #333333;
-  font-size: 24px;
-  text-transform: uppercase;
+  color: #8f8f8f;
 }
-  .menuItems li a::before {
+
+.menuItems li a::before {
   content: attr(data-item);
   position: absolute;
   top: 0;
   left: 0;
   width: 0;
+  height: 100%;
   overflow: hidden;
-  color: #8C2F39;
+  color: #6D1F2F;
   transition: 0.5s;
 }
 
-/* HOVER effect */
 .menuItems li a:hover::before {
   width: 100%;
 }
