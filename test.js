@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const dot = document.createElement('div');
         dot.classList.add('dot');
         const BASE_WIDTH = 600;
-const BASE_HEIGHT = 850; // adjust slightly if needed
+const BASE_HEIGHT =BASE_WIDTH * (2000 / 1414); // adjust slightly if needed
 
 dot.style.left = (bone.x / BASE_WIDTH * 100) + '%';
 dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
@@ -301,7 +301,7 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
         const dot = document.createElement('div');
         dot.classList.add('dot');
         const BASE_WIDTH = 600;
-const BASE_HEIGHT = 850; // adjust slightly if needed
+const BASE_HEIGHT = BASE_WIDTH * (2000 / 1414); // adjust slightly if needed
 
 dot.style.left = (bone.x / BASE_WIDTH * 100) + '%';
 dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
