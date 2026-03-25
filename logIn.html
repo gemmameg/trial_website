@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <html>
-<head>
+<style>
+   * {
+  padding: 0;
+  margin: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  background: #E8BFAF;
+  font-family: Hack, monospace;
+}
+
+.menuItems {
+  list-style: none;
+  display: flex;
+}
+
+.menuItems li {
+  margin: 25px;
+}
+
+.menuItems li a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: #333333;
+  font-size: 30px;
+}
+
+.menuItems li a::before {
+  content: attr(data-item);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #6D1F2F;
+  transition: 0.5s;
+}
+
+.menuItems li a:hover::before {
+  width: 100%;
+}
+    </style>
+
     
-    <title>Piereģistrēšanās</title>
-    
-</head>
 <body>
    
-    <a href="index.html">Atgriezties</a> 
-    <a href = "#"> Apskatīt savus rezultatus <a>
-
-    <h1>Log in</h1>
+       <h1>Log in</h1>
     <p Te var ieiet savā kontā></p>
 
     
