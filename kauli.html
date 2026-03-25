@@ -1,14 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-    
-    <title>Kauli</title>
-</head>
-<html>
-<head>
-<title>Kauli</title>
 
 <style>
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  background: #E8BFAF;
+}
+
+.menuItems {
+  list-style: none;
+  display: flex;
+}
+
+.menuItems li {
+  margin: 25px;
+}
+
+.menuItems li a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: #333333;
+  font-size: 30px;
+}
+
+.menuItems li a::before {
+  content: attr(data-item);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #6D1F2F;
+  transition: 0.5s;
+}
+
+.menuItems li a:hover::before {
+  width: 100%;
+
+
 body {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -55,7 +91,6 @@ button {
 
 
 
-</head>
 
 <body>
 
