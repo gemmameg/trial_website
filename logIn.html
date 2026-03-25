@@ -196,7 +196,17 @@ button:hover {
   transform: translate(-2px, -2px);
 }
 
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--primary);
+}
 
+.footer a {
+  color: var(--primary);
+  font-weight: bold;
+  text-decoration: underline;
+}
     </style>
 <h1>Reģistrēšanās</h1>
 <nav>
@@ -237,7 +247,22 @@ button:hover {
          <button type="submit">Log in</button>
          </form>  
            <button id="logoutBtn">Iziet</button>
-       
+    
+               <div class="footer">
+            Vēlies nomainīt paroli?
+                 <form id="change_password">
+<div class="input-group">
+            <label for="parole_old">Vecā parole</label>
+                <input id="parole_old" placeholder="Vecā parole">
+        </div>
+        
+        <div class="input-group">
+            <label for="parole_new">Jaunā parole</label>
+             <input id="parole_new" type="password" placeholder="Jaunā parole">
+        </div>
+                   <button type="submit">Mainīt</button>
+                 </form>
+        </div>
     
         <div class="divider">Vai</div>
     
