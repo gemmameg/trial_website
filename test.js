@@ -226,8 +226,11 @@ document.addEventListener("DOMContentLoaded", () => {
       bones.forEach((bone, index) => {
         const dot = document.createElement('div');
         dot.classList.add('dot');
-        dot.style.left = bone.x + 'px';
-        dot.style.top = bone.y + 'px';
+        const BASE_WIDTH = 600;
+const BASE_HEIGHT = 850; // adjust slightly if needed
+
+dot.style.left = (bone.x / BASE_WIDTH * 100) + '%';
+dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
         dot.addEventListener('click', () => checkAnswer(dot, index));
         gameContainer.appendChild(dot);
       });
@@ -297,9 +300,11 @@ document.addEventListener("DOMContentLoaded", () => {
       bones.forEach((bone) => {
         const dot = document.createElement('div');
         dot.classList.add('dot');
-        dot.style.left = bone.x + 'px';
-        dot.style.top = bone.y + 'px';
+        const BASE_WIDTH = 600;
+const BASE_HEIGHT = 850; // adjust slightly if needed
 
+dot.style.left = (bone.x / BASE_WIDTH * 100) + '%';
+dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
         dot.addEventListener('click', () => {
           boneNameDiv.textContent = `${bone.name} — ${bone.latin}`;
         });
