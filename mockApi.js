@@ -10,15 +10,15 @@ let mockResults = [
   [87, "Bob", "Science"]
 ];
 
-export async function mockFetch(url, options) {
-  await new Promise(res => setTimeout(res, 300)); // simulate delay
-  const { method } = options || {};
+export async function mockFetch(url, options = {}) {
+  await new Promise(res => setTimeout(res, 300)); // simulate network delay
+  const { method } = options;
 
   // ----- REGISTER -----
   if (url === "/register" && method === "POST") {
     const body = JSON.parse(options.body);
     const exists = mockUsers.some(u => u.lietotajvards === body.lietotajvards);
-    if (exists) return { ok: false, json: async () => ({ error: "Username taken" }) };
+    if (exists) return { ok: false, json: async () => ({ ok: false, error: "Username taken" }) };
 
     mockUsers.push(body);
     return { ok: true, json: async () => ({ ok: true }) };
@@ -28,7 +28,7 @@ export async function mockFetch(url, options) {
   if (url === "/log_in" && method === "POST") {
     const body = JSON.parse(options.body);
     const user = mockUsers.find(u => u.lietotajvards === body.lietotajvards && u.parole === body.parole);
-    if (!user) return { ok: false, json: async () => ({ error: "Invalid credentials" }) };
+    if (!user) return { ok: false, json: async () => ({ ok: false, error: "Invalid credentials" }) };
 
     loggedInUser = user;
     return { ok: true, json: async () => ({ ok: true }) };
@@ -44,30 +44,33 @@ export async function mockFetch(url, options) {
   if (url === "/change_password" && method === "POST") {
     const body = JSON.parse(options.body);
     if (!loggedInUser || loggedInUser.parole !== body.old_password)
-      return { ok: false, json: async () => ({ error: "Incorrect old password" }) };
+      return { ok: false, json: async () => ({ ok: false, error: "Incorrect old password" }) };
 
     loggedInUser.parole = body.new_password;
     return { ok: true, json: async () => ({ ok: true }) };
   }
 
-  // ----- SHOW RESULTS -----
-  if (url === "/paradit_rez" && method === "GET") {
-    if (!loggedInUser) return { ok: false, json: async () => ({ error: "Not logged in" }) };
-    return { ok: true, json: async () => ({ ok: true, rezultati: mockResults }) };
-  }
-  
-if (url === "/check_login") {
-  if (loggedInUser) return { ok: true, json: async () => ({ ok: true }) };
-  return { ok: true, json: async () => ({ ok: false }) };
-}
+  // ----- SEND RESULT -----
+  if (url === "/send_result" && method === "POST") {
+    if (!loggedInUser) return { ok: false, json: async () => ({ ok: false, error: "Not logged in" }) };
 
-if (url === "/send_result" && method === "POST") {
-  const body = JSON.parse(options.body);
-  if (loggedInUser) {
-    mockResults.push([body.rezultats, loggedInUser.vards, "Unknown"]); // simple demo
+    const body = JSON.parse(options.body);
+    mockResults.push([body.rezultats, loggedInUser.vards, "Test"]); // store a dummy subject
     return { ok: true, json: async () => ({ ok: true }) };
   }
-  return { ok: false, json: async () => ({ error: "Not logged in" }) };
-}
-  return { ok: false, json: async () => ({ error: "Unknown endpoint" }) };
+
+  // ----- SHOW RESULTS -----
+  if (url === "/paradit_rez" && method === "GET") {
+    if (!loggedInUser) return { ok: false, json: async () => ({ ok: false, error: "Not logged in" }) };
+    return { ok: true, json: async () => ({ ok: true, rezultati: mockResults }) };
+  }
+
+  // ----- CHECK LOGIN -----
+  if (url === "/check_login") {
+    if (loggedInUser) return { ok: true, json: async () => ({ ok: true }) };
+    return { ok: true, json: async () => ({ ok: false }) };
+  }
+
+  // ----- UNKNOWN ENDPOINT -----
+  return { ok: false, json: async () => ({ ok: false, error: "Unknown endpoint" }) };
 }
