@@ -56,5 +56,18 @@ export async function mockFetch(url, options) {
     return { ok: true, json: async () => ({ ok: true, rezultati: mockResults }) };
   }
   
+if (url === "/check_login") {
+  if (loggedInUser) return { ok: true, json: async () => ({ ok: true }) };
+  return { ok: true, json: async () => ({ ok: false }) };
+}
+
+if (url === "/send_result" && method === "POST") {
+  const body = JSON.parse(options.body);
+  if (loggedInUser) {
+    mockResults.push([body.rezultats, loggedInUser.vards, "Unknown"]); // simple demo
+    return { ok: true, json: async () => ({ ok: true }) };
+  }
+  return { ok: false, json: async () => ({ error: "Not logged in" }) };
+}
   return { ok: false, json: async () => ({ error: "Unknown endpoint" }) };
 }
