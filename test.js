@@ -1,5 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
 import { mockFetch } from "./mockApi.js"; /// take this out in main
+
+document.addEventListener("DOMContentLoaded", () => {
+
 const fetchFn = true ? mockFetch : fetch; /// take this out in main
 
   // ---------------- REGISTER ----------------
