@@ -141,23 +141,30 @@ document.addEventListener("DOMContentLoaded", () => {
   
   if (paraditBtn) {
     paraditBtn.addEventListener("click", async () => {
-      const response = await fetch("/paradit_rez");
-
-      if (!response.ok) {
-        alert("Jūs neesat pieslēdzies");
-        return;
-      }
+      const response = await fetch("/paradit_rez",{method: "GET",
+      credentials: "include"});
 
       const result = await response.json();
 
-      if (result.ok) {
-        let text = "";
-        result.rezultati.forEach(r => {
-          text += r[0] + "% <br>";
-        });
+      if (!result.ok) {
+        alert(result.error);
+      }
 
-        const output = document.getElementById("paradit_button");
-        if (output) output.innerHTML = text;
+      if (result.ok) {
+       const tbody = document.querySelector("#results-table tbody");
+tbody.innerHTML = "";
+
+result.rezultati.forEach(r => {
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td>${r[0]}%</td>
+    <td>${r[1]}</td>
+    <td>${r[2]}</td>
+  `;
+
+  tbody.appendChild(row);
+});
       }
     });
   }
