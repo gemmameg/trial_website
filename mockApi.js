@@ -21,7 +21,7 @@ export async function mockFetch(url, options) {
     if (exists) return { ok: false, json: async () => ({ error: "Username taken" }) };
 
     mockUsers.push(body);
-    return { ok: true, json: async () => ({}) };
+    return { ok: true, json: async () => ({ ok: true }) };
   }
 
   // ----- LOGIN -----
@@ -31,7 +31,7 @@ export async function mockFetch(url, options) {
     if (!user) return { ok: false, json: async () => ({ error: "Invalid credentials" }) };
 
     loggedInUser = user;
-    return { ok: true, json: async () => ({}) };
+    return { ok: true, json: async () => ({ ok: true }) };
   }
 
   // ----- LOGOUT -----
@@ -47,7 +47,7 @@ export async function mockFetch(url, options) {
       return { ok: false, json: async () => ({ error: "Incorrect old password" }) };
 
     loggedInUser.parole = body.new_password;
-    return { ok: true, json: async () => ({}) };
+    return { ok: true, json: async () => ({ ok: true }) };
   }
 
   // ----- SHOW RESULTS -----
@@ -55,6 +55,6 @@ export async function mockFetch(url, options) {
     if (!loggedInUser) return { ok: false, json: async () => ({ error: "Not logged in" }) };
     return { ok: true, json: async () => ({ ok: true, rezultati: mockResults }) };
   }
-
+  
   return { ok: false, json: async () => ({ error: "Unknown endpoint" }) };
 }
