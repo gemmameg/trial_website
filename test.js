@@ -15,7 +15,7 @@ const fetchFn = true ? mockFetch : fetch; /// take this out in main
       const parole = document.getElementById("parole");
       const e_pasts = document.getElementById("e_pasts");
 
-      const response = await fetchFN("/register", { ///remove Fn
+      const response = await fetchFn("/register", { ///remove Fn
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
