@@ -1,5 +1,4 @@
-import { mockFetch } from "./mockApi.js"; /// take this out in main
-const fetchFn = true ? mockFetch : fetch; /// take this out in main
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -16,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const parole = document.getElementById("parole");
       const e_pasts = document.getElementById("e_pasts");
 
-      const response = await fetchFn("/register", { ///remove Fn
+      const response = await fetch("/register", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -50,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const lietotajvards_log = document.getElementById("lietotajvards_log");
       const parole_log = document.getElementById("parole_log");
 
-      const response = await fetchFn("/log_in", { ///removeFn
+      const response = await fetch("/log_in", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -76,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
-      const response = await fetchFn("/log_out", { method: "POST" }); ///remove Fn
+      const response = await fetch("/log_out", { method: "POST" }); 
       const result = await response.json();
 
       if (result.ok) {
@@ -96,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const old_password = document.getElementById("parole_old");
       const new_password = document.getElementById("parole_new");
 
-      const response = await fetchFn("/change_password", { /// remove Fn
+      const response = await fetch("/change_password", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -146,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   if (paraditBtn) {
     paraditBtn.addEventListener("click", async () => {
-      const response = await fetchFn("/paradit_rez",{method: "GET", ////remove Fn
+      const response = await fetch("/paradit_rez",{method: "GET", 
       credentials: "include"});
 
       const result = await response.json();
@@ -276,7 +275,7 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
       scoreDiv.textContent = `Tavs rezultāts: ${score}/${bones.length} (${Math.round(score/bones.length*100)}%)`;
 
       const procenti = Math.round(score / bones.length * 100);
-      const response = await fetchFn("/send_result", { /// remove Fn
+      const response = await fetch("/send_result", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -359,7 +358,7 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
 });
 ///hides stuff at login page
 document.addEventListener("DOMContentLoaded", async () => {
-    const response = await fetchFn("/check_login"); /// removeFn
+    const response = await fetch("/check_login"); 
     const result = await response.json();
 
   const logoutBtn = document.getElementById("logoutBtn");
