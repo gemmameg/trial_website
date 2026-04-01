@@ -157,7 +157,25 @@ button {
     padding: 0 25px;
   }
 }
- 
+#score {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: #F2D6C9;
+  border: 2px solid #333333;
+  border-radius: 20px;
+  box-shadow: #333333 4px 4px 0 0;
+
+  padding: 20px 40px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+
+  z-index: 2000; /* above everything */
+  display: none; /* hidden by default */
+} 
   
 </style>
 
