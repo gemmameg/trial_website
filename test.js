@@ -273,7 +273,8 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
     async function showScore() {
       boneNameDiv.textContent = '';
       scoreDiv.textContent = `Tavs rezultāts: ${score}/${bones.length} (${Math.round(score/bones.length*100)}%)`;
-      scoreDiv.style.display = "block";
+      scoreDiv.style.display = "block";//newwwwwwwwwwwwwwwww
+      scoreDiv.classList.add("show");//newwwwwwwwwwwwwwwwww
       const procenti = Math.round(score / bones.length * 100);
       const response = await fetch("/send_result", { 
         method: "POST",
