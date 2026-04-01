@@ -174,9 +174,17 @@ button {
   text-align: center;
 
   z-index: 2000; /* above everything */
-
+  display: none;
 } 
-  
+#score {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#score.show {
+  display: block;
+  opacity: 1;
+} 
 </style>
 
 <h1>Kauli</h1>
