@@ -225,7 +225,7 @@ result.rezultati.forEach(r => {
       startBtn.style.display = 'none';
       studyBtn.style.display = 'none';
       exitBtn.style.display = 'inline-block';
-      scoreDiv.style.display = "none";
+      scoreDiv.style.display = "none";//newwwwwwwww
       showBone();
     }
       
@@ -306,7 +306,7 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
       studyBtn.style.display = 'none';
       endStudyBtn.style.display = 'inline-block';
       exitBtn.style.display = 'none';
-      scoreDiv.style.display = "none";
+      scoreDiv.style.display = "none";//newwwwwwwwwwwwww
       gameContainer.querySelectorAll('.dot').forEach(d => d.remove());
 
       bones.forEach((bone) => {
@@ -346,7 +346,7 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
       studyBtn.style.display = 'inline-block';
       endStudyBtn.style.display = 'none';
       exitBtn.style.display = 'none';
-      scoreDiv.style.display = "none";
+      scoreDiv.style.display = "none";//newwwwwwwwwwwwwwwwwwww
     }
 
     // EVENTS
