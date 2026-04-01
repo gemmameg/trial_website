@@ -225,7 +225,7 @@ result.rezultati.forEach(r => {
       startBtn.style.display = 'none';
       studyBtn.style.display = 'none';
       exitBtn.style.display = 'inline-block';
-
+      scoreDiv.style.display = "none";
       showBone();
     }
       
@@ -273,7 +273,7 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
     async function showScore() {
       boneNameDiv.textContent = '';
       scoreDiv.textContent = `Tavs rezultāts: ${score}/${bones.length} (${Math.round(score/bones.length*100)}%)`;
-
+      scoreDiv.style.display = "block";
       const procenti = Math.round(score / bones.length * 100);
       const response = await fetch("/send_result", { 
         method: "POST",
@@ -306,7 +306,7 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
       studyBtn.style.display = 'none';
       endStudyBtn.style.display = 'inline-block';
       exitBtn.style.display = 'none';
-
+      scoreDiv.style.display = "none";
       gameContainer.querySelectorAll('.dot').forEach(d => d.remove());
 
       bones.forEach((bone) => {
@@ -346,6 +346,7 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
       studyBtn.style.display = 'inline-block';
       endStudyBtn.style.display = 'none';
       exitBtn.style.display = 'none';
+      scoreDiv.style.display = "none";
     }
 
     // EVENTS
