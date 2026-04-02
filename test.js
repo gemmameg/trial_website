@@ -172,9 +172,30 @@ document.addEventListener("DOMContentLoaded", () => {
 // fake code-------------------------------------
   
  const paraditBtn = document.getElementById("paradit_rez");
+const table = document.getElementById("results-table");
+
+let isVisible = false;
+let dataLoaded = false;
 
 if (paraditBtn) {
   paraditBtn.addEventListener("click", async () => {
+    
+    // 🔁 Toggle OFF (hide)
+    if (isVisible) {
+      table.style.display = "none";
+      paraditBtn.textContent = "Parādīt manus rezultātus";
+      isVisible = false;
+      return;
+    }
+
+    // 🔁 Toggle ON (show)
+    table.style.display = "table";
+    paraditBtn.textContent = "Paslēpt manus rezultātus";
+    isVisible = true;
+
+    // 📦 Load data only once
+    if (dataLoaded) return;
+
     let result;
 
     try {
@@ -183,9 +204,13 @@ if (paraditBtn) {
         credentials: "include"
       });
 
-      result = await response.json(); // ✅ inside try
+      if (!response.ok) throw new Error("Server error");
+
+      result = await response.json();
+
     } catch (err) {
-      // ✅ catch goes AFTER try closes
+      console.log("Using fake data");
+
       result = {
         ok: true,
         rezultati: [
@@ -215,6 +240,8 @@ if (paraditBtn) {
 
       tbody.appendChild(row);
     });
+
+    dataLoaded = true;
   });
 }
   // ---------------- GAME ----------------
