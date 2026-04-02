@@ -142,48 +142,51 @@ document.addEventListener("DOMContentLoaded", () => {
   //}
   // ---------------- SHOW RESULTS ----------------
   const paraditBtn = document.getElementById("paradit_rez");
- if (paraditBtn) {
+
+if (paraditBtn) {
   paraditBtn.addEventListener("click", async () => {
     let result;
+
     try {
       const response = await fetch("/paradit_rez", {
         method: "GET",
         credentials: "include"
       });
-      catch (err) {
-    // Fake part
+
+      result = await response.json(); // ✅ inside try
+    } catch (err) {
+      // ✅ catch goes AFTER try closes
       result = {
-      ok: true,
-      rezultati: [
-        [100, "Test User", "Demo"],
-        [85, "Jane", "English"],
-        [67, "Mark", "History"]
-      ]
-    };
-  }
-      if (!result.ok) {
-        alert(result.error);
-        return;
-      }
+        ok: true,
+        rezultati: [
+          [100, "Test User", "Demo"],
+          [85, "Jane", "English"],
+          [67, "Mark", "History"]
+        ]
+      };
+    }
 
-    
-       const tbody = document.querySelector("#results-table tbody");
-tbody.innerHTML = "";
+    if (!result.ok) {
+      alert(result.error);
+      return;
+    }
 
-result.rezultati.forEach(r => {
-  const row = document.createElement("tr");
+    const tbody = document.querySelector("#results-table tbody");
+    tbody.innerHTML = "";
 
-  row.innerHTML = `
-    <td>${r[0]}%</td>
-    <td>${r[1]}</td>
-    <td>${r[2]}</td>
-  `;
+    result.rezultati.forEach(r => {
+      const row = document.createElement("tr");
 
-  tbody.appendChild(row);
-});
-      }
+      row.innerHTML = `
+        <td>${r[0]}%</td>
+        <td>${r[1]}</td>
+        <td>${r[2]}</td>
+      `;
+
+      tbody.appendChild(row);
     });
-  }
+  });
+}
 
   // ---------------- GAME ----------------
   const startBtn = document.getElementById('start-btn');
