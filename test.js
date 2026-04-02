@@ -148,8 +148,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("/paradit_rez",{method: "GET", 
       credentials: "include"});
 
-      const result = await response.json();
-
+      //const result = await response.json();
+      result = await response.json();
+      } catch (err) {
+    // Fake part
+      result = {
+      ok: true,
+      rezultati: [
+        [100, "Test User", "Demo"],
+        [85, "Jane", "English"],
+        [67, "Mark", "History"]
+      ]
+    };
+  }
       if (!result.ok) {
         alert(result.error);
       }
