@@ -142,15 +142,14 @@ document.addEventListener("DOMContentLoaded", () => {
   //}
   // ---------------- SHOW RESULTS ----------------
   const paraditBtn = document.getElementById("paradit_rez");
-  
-  if (paraditBtn) {
-    paraditBtn.addEventListener("click", async () => {
-      const response = await fetch("/paradit_rez",{method: "GET", 
-      credentials: "include"});
-
-      //const result = await response.json();
-      result = await response.json();
-      } 
+ if (paraditBtn) {
+  paraditBtn.addEventListener("click", async () => {
+    let result;
+    try {
+      const response = await fetch("/paradit_rez", {
+        method: "GET",
+        credentials: "include"
+      });
       catch (err) {
     // Fake part
       result = {
