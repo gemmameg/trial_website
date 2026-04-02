@@ -111,6 +111,14 @@ button {
     padding: 0 25px;
   }
 }
+  table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+}
 </style>
 <h1>Rezultāti</h1>
 <nav>
@@ -123,7 +131,16 @@ button {
 <body>
  <script src="test.js" defer></script>     
 <button id="paradit_rez">Parādīt manus rezultātus</button>
-
+<table id="results-table">
+  <thead>
+    <tr>
+      <th>Rezultāts (%)</th>
+      <th>Spēle</th>
+      <th>Mēģinājums</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
 
 </body>
 </html>
