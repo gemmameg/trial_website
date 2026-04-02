@@ -1,8 +1,4 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
-
-
 
   // ---------------- REGISTER ----------------
   const registerForm = document.getElementById("registresanas");
@@ -15,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const parole = document.getElementById("parole");
       const e_pasts = document.getElementById("e_pasts");
 
-      const response = await fetch("/register", { 
+      const response = await fetch("/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -49,8 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const lietotajvards_log = document.getElementById("lietotajvards_log");
       const parole_log = document.getElementById("parole_log");
 
-      const response = await fetch("/log_in", { 
+      const response = await fetch("/log_in", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           lietotajvards: lietotajvards_log?.value,
@@ -64,22 +61,23 @@ document.addEventListener("DOMContentLoaded", () => {
         alert(lietotajvards_log.value + " login successful!");
         lietotajvards_log.value = "";
         parole_log.value = "";
+        location.reload();
       } else {
         alert(result.error);
       }
     };
   }
-  
 
   // ---------------- LOGOUT ----------------
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
-      const response = await fetch("/log_out", { method: "POST" }); 
+      const response = await fetch("/log_out", { method: "POST", credentials: "include" });
       const result = await response.json();
 
       if (result.ok) {
         alert("Logged out successfully!");
+        location.reload();
       } else {
         alert("Logout failed");
       }
@@ -95,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const old_password = document.getElementById("parole_old");
       const new_password = document.getElementById("parole_new");
 
-      const response = await fetch("/change_password", { 
+      const response = await fetch("/change_password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -141,7 +139,39 @@ document.addEventListener("DOMContentLoaded", () => {
     //};
   //}
   // ---------------- SHOW RESULTS ----------------
-  const paraditBtn = document.getElementById("paradit_rez");
+ // const paraditBtn = document.getElementById("paradit_rez");
+  
+  //if (paraditBtn) {
+    //paraditBtn.addEventListener("click", async () => {
+      //const response = await fetch("/paradit_rez",{method: "GET",
+      //credentials: "include"});
+
+      //const result = await response.json();
+
+      //if (!result.ok) {
+        //alert(result.error);
+      //}
+
+      //if (result.ok) {
+        //let text = "";
+        //result.rezultati.forEach(r => {
+          //text += `
+            //<div>
+              //Spēle: ${r[1]} <br>
+              //Mēģinājums: ${r[2]} <br>
+              //Rezultāts: ${r[0]}%
+            //</div><br>
+          //`;
+        //});
+
+        //const output = document.getElementById("paradit_button");
+        //if (output) output.innerHTML = text;
+      //}
+    //});
+ // }
+// fake code-------------------------------------
+  
+ const paraditBtn = document.getElementById("paradit_rez");
 
 if (paraditBtn) {
   paraditBtn.addEventListener("click", async () => {
@@ -187,7 +217,6 @@ if (paraditBtn) {
     });
   });
 }
-
   // ---------------- GAME ----------------
   const startBtn = document.getElementById('start-btn');
   const studyBtn = document.getElementById('study-btn');
@@ -254,10 +283,9 @@ if (paraditBtn) {
         const dot = document.createElement('div');
         dot.classList.add('dot');
         const BASE_WIDTH = 600;
-const BASE_HEIGHT =BASE_WIDTH * (2000 / 1414); // adjust slightly if needed
-
-dot.style.left = (bone.x / BASE_WIDTH * 100) + '%';
-dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
+        const BASE_HEIGHT =BASE_WIDTH * (2000 / 1414); // adjust slightly if needed
+        dot.style.left = (bone.x / BASE_WIDTH * 100) + '%';
+        dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
         dot.addEventListener('click', () => checkAnswer(dot, index));
         gameContainer.appendChild(dot);
       });
@@ -291,11 +319,13 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
       scoreDiv.style.display = "block";//newwwwwwwwwwwwwwwww
       scoreDiv.classList.add("show");//newwwwwwwwwwwwwwwwww
       const procenti = Math.round(score / bones.length * 100);
-      const response = await fetch("/send_result", { 
+      const response = await fetch("/send_result", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          rezultats: procenti
+          rezultats: procenti,
+          spele: "Kauli",
         })
       });
 
@@ -329,10 +359,10 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
         const dot = document.createElement('div');
         dot.classList.add('dot');
         const BASE_WIDTH = 600;
-const BASE_HEIGHT = BASE_WIDTH * (2000 / 1414); // adjust slightly if needed
+        const BASE_HEIGHT =BASE_WIDTH * (2000 / 1414); // adjust slightly if needed
+        dot.style.left = (bone.x / BASE_WIDTH * 100) + '%';
+        dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
 
-dot.style.left = (bone.x / BASE_WIDTH * 100) + '%';
-dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
         dot.addEventListener('click', () => {
           boneNameDiv.textContent = `${bone.name} — ${bone.latin}`;
         });
@@ -375,14 +405,17 @@ dot.style.top = (bone.y / BASE_HEIGHT * 100) + '%';
 });
 ///hides stuff at login page
 document.addEventListener("DOMContentLoaded", async () => {
-    const response = await fetch("/check_login"); 
+    const response = await fetch("/check_login",{
+    
+      credentials: "include"
+    }); 
     const result = await response.json();
 
   const logoutBtn = document.getElementById("logoutBtn");
   const changeForm = document.getElementById("change_password");
   const loginForm = document.getElementById("log_in");
 
-  if (result.ok) {
+  if (result.loggedIn) {
     // ✅ Logged in
     if (logoutBtn) logoutBtn.style.display = "block";
     if (changeForm) changeForm.style.display = "block";
