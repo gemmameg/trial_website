@@ -150,7 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       //const result = await response.json();
       result = await response.json();
-      } catch (err) {
+      } 
+      catch (err) {
     // Fake part
       result = {
       ok: true,
@@ -163,9 +164,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
       if (!result.ok) {
         alert(result.error);
+        return;
       }
 
-      if (result.ok) {
+    
        const tbody = document.querySelector("#results-table tbody");
 tbody.innerHTML = "";
 
