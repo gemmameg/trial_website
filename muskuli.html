@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    * {
+  padding: 0;
+  margin: 0;
+}
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  background: #E8BFAF;
+  z-index: 1000;
+  font-family: Hack, monospace;
+}
+h1{
+position: fixed;
+    top: 0;
+    left: 0;
+  margin: 25px;
+  font-size: 30px;
+    z-index:1005;
+  font-family: Hack, monospace;
+  color: #6D1F2F; /* color change*/
+}
+.menuItems {
+  list-style: none;
+  display: flex;
+}
+
+.menuItems li {
+  margin: 25px;
+}
+
+.menuItems li a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: #333333;
+  font-size: 30px;
+}
+
+.menuItems li a::before {
+  content: attr(data-item);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #6D1F2F;
+  transition: 0.5s;
+}
+
+.menuItems li a:hover::before {
+  width: 100%;
+}
+
+  body 
+  {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 10px;
+  }
+
+  #organ-name {
+    font-size: 20px;
+    margin-bottom: 15px;
+    min-height: 30px;
+  }
+
+  #game-container-organs {
+    position: relative;
+    display: inline-block;
+  }
+
+  #organs-image {
+    width: 400px;
+    max-width: 100%;
+  }
+
+  .dot-organs {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #888;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .dot-organs.correct {
+    background-color: #4caf50;
+  }
+
+  .dot-organs.wrong {
+    background-color: #f44336;
+  }
+
+  #score-organs {
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: #F2D6C9;
+  border: 2px solid #6D1F2F; /* color change */
+  border-radius: 20px;
+  box-shadow: #6D1F2F 4px 4px 0 0; /* color change*/
+
+  padding: 20px 40px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+
+  z-index: 2000; /* above everything */
+  display: none;
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#score-organs.show {
+  display: block;
+  opacity: 1;
+} 
+
+  .button-panel {
+  position: fixed;
+  top: 100px;       /* below navbar */
+  left: 20px;
+  
+  display: flex;
+  flex-direction: column;  /* 👈 stack vertically */
+  gap: 15px;
+
+  z-index: 1005;
+}
+
+button {
+  background-color: #F2D6C9;
+  border: 2px solid #6D1F2F; /* coloe change*/
+  border-radius: 30px;
+  box-shadow: #6D1F2F 4px 4px 0 0; /* color change*/
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  z-index:1005;
+}
+
+button:hover {
+  background-color: #E8BFAF;
+  
+}
+
+button:active {
+  
+  box-shadow: #6D1F2F 2px 2px 0 0;
+  border: #6D1F2F;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+button {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+</style>
+   <script src="static/majaslapa_1.js" defer></script>
+   <h1>Orgāni</h1>
+    <nav>
+    
+    <ul class="menuItems">
+      <li><a href='/' data-item='Atpakaļ'>Atpakaļ</a></li>
+      <li><a href='/3' data-item='Reģistrēties'>Reģistrēties</a></li>
+      <li><a href='/6' data-item='Rezultāti'>Rezultāti</a></li>
+      
+    </ul>
+  </nav>
+  <body>
+    <div class="button-panel">
+    <button id="start-btn-organs">Sākt spēli</button>
+<button id="study-btn-organs">Mācīties terminus</button>
+<button id="end-study-btn-organs" style="display:none;">Beigt mācīšanos</button>
+<button id="exit-btn-organs" style="display:none;">Beigt spēli</button>
+</div>
+<div id="organ-name"></div>
+
+<div id="game-container-organs">
+  <img id="organs-image"
+       src="https://www.image2url.com/r2/default/images/1777829649056-be1e994a-fd97-4b02-873f-9012fa829ef7.png"
+       alt="Orgāni">
+</div>
+
+<div id="score-organs"></div>
+</body>
+</html>
