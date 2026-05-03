@@ -596,6 +596,197 @@ const musclesList = [
 
 
 
+// Orgānu spēle
+  document.addEventListener("DOMContentLoaded", async () => {
+const organsData = [
+  {name: "Smadzenes", latin: "Encephalon", x: 192, y: 28},
+  {name: "Traheja", latin: "Trachea", x: 188, y: 118},
+  {name: "Labā plauša", latin: "Pulmo dexter", x: 158, y: 230},
+  {name: "Sirds", latin: "Cor", x: 192, y: 240},
+  {name: "Akna", latin: "Hepar", x: 162, y: 300},
+  {name: "Kuņģis", latin: "Gaster", x: 225, y: 300},
+  {name: "Labā niere", latin: "Ren dexter", x: 160, y: 330},
+  {name: "Tievā zarna", latin: "Intestinum tenue", x: 193, y: 410},
+  {name: "Resnā zarna", latin: "Intestinum crassum", x: 240, y: 418},
+  {name: "Urīnpūslis", latin: "Vesica urinaria", x: 188, y: 450}
+];
+
+let currentOrganIndexOrgans = 0;
+let scoreOrgans = 0;
+let studyModeOrgans = false;
+
+const startBtnOrgans = document.getElementById('start-btn-organs');
+const studyBtnOrgans = document.getElementById('study-btn-organs');
+const endStudyBtnOrgans = document.getElementById('end-study-btn-organs');
+const exitBtnOrgans = document.getElementById('exit-btn-organs');
+const organNameDivOrgans = document.getElementById('organ-name');
+const gameContainerOrgans = document.getElementById('game-container-organs');
+const scoreDivOrgans = document.getElementById('score-organs');
+
+// Shuffle function
+function shuffleArrayOrgans(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+function startGameOrgans() {
+  studyModeOrgans = false;
+
+  shuffleArrayOrgans(organsData);
+
+  currentOrganIndexOrgans = 0;
+  scoreOrgans = 0;
+
+  scoreDivOrgans.textContent = '';
+
+  startBtnOrgans.style.display = 'none';
+  studyBtnOrgans.style.display = 'none';
+  endStudyBtnOrgans.style.display = 'none';
+  exitBtnOrgans.style.display = 'inline-block';
+
+  showOrganOrgans();
+}
+
+function showOrganOrgans() {
+  const organ = organsData[currentOrganIndexOrgans];
+  organNameDivOrgans.textContent = `${organ.name} — ${organ.latin}`;
+
+  gameContainerOrgans.querySelectorAll('.dot-organs').forEach(dot => dot.remove());
+
+  organsData.forEach((organ, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot-organs');
+
+    dot.style.left = organ.x + 'px';
+    dot.style.top = organ.y + 'px';
+
+    dot.addEventListener('click', () => checkAnswerOrgans(dot, index));
+
+    gameContainerOrgans.appendChild(dot);
+  });
+}
+
+function checkAnswerOrgans(dot, index) {
+  if (studyModeOrgans) return;
+
+  const correctIndex = currentOrganIndexOrgans;
+
+  if (index === correctIndex) {
+    dot.classList.add('correct');
+    scoreOrgans++;
+  } else {
+    dot.classList.add('wrong');
+    gameContainerOrgans.querySelectorAll('.dot-organs')[correctIndex].classList.add('correct');
+  }
+
+  setTimeout(() => {
+    currentOrganIndexOrgans++;
+
+    if (currentOrganIndexOrgans < organsData.length) {
+      showOrganOrgans();
+    } else {
+      showScoreOrgans();
+    }
+  }, 800);
+}
+
+async function showScoreOrgans() {
+  organNameDivOrgans.textContent = '';
+
+  scoreDivOrgans.textContent =
+    `Tavs rezultāts: ${scoreOrgans}/${organsData.length} (${Math.round(scoreOrgans / organsData.length * 100)}%)`;
+      const procenti_2 = Math.round(scoreOrgans / organsData.length * 100);
+      try {
+        const response = await fetch("/send_result", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            rezultats: procenti_2,
+            spele: "Orgāni",
+          })
+
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          alert("Failed to save result: " + result.error);
+        }
+      } catch (err) {
+        console.error("Failed to send result:", err);
+      }
+  startBtnOrgans.textContent = "Sākt spēli no sākuma";
+
+  startBtnOrgans.style.display = 'inline-block';
+  studyBtnOrgans.style.display = 'inline-block';
+  exitBtnOrgans.style.display = 'none';
+}
+
+// STUDY MODE
+function startStudyOrgans() {
+  studyModeOrgans = true;
+
+  organNameDivOrgans.textContent = "Nospied uz punkta, lai redzētu orgānu";
+  scoreDivOrgans.textContent = '';
+
+  startBtnOrgans.style.display = 'none';
+  studyBtnOrgans.style.display = 'none';
+  endStudyBtnOrgans.style.display = 'inline-block';
+  exitBtnOrgans.style.display = 'none';
+
+  gameContainerOrgans.querySelectorAll('.dot-organs').forEach(dot => dot.remove());
+
+  organsData.forEach((organ) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot-organs');
+
+    dot.style.left = organ.x + 'px';
+    dot.style.top = organ.y + 'px';
+
+    dot.addEventListener('click', () => {
+      organNameDivOrgans.textContent = `${organ.name} — ${organ.latin}`;
+    });
+
+    gameContainerOrgans.appendChild(dot);
+  });
+}
+
+function endStudyOrgans() {
+  studyModeOrgans = false;
+  resetToMenuOrgans();
+}
+
+// EXIT GAME
+function exitGameOrgans() {
+  studyModeOrgans = false;
+  resetToMenuOrgans();
+}
+
+// RESET
+function resetToMenuOrgans() {
+  organNameDivOrgans.textContent = '';
+  scoreDivOrgans.textContent = '';
+
+  gameContainerOrgans.querySelectorAll('.dot-organs').forEach(dot => dot.remove());
+
+  startBtnOrgans.style.display = 'inline-block';
+  studyBtnOrgans.style.display = 'inline-block';
+  endStudyBtnOrgans.style.display = 'none';
+  exitBtnOrgans.style.display = 'none';
+}
+
+// EVENTS
+startBtnOrgans.addEventListener('click', startGameOrgans);
+studyBtnOrgans.addEventListener('click', startStudyOrgans);
+endStudyBtnOrgans.addEventListener('click', endStudyOrgans);
+exitBtnOrgans.addEventListener('click', exitGameOrgans);
+  });
+
+
+
+
 
 
 
