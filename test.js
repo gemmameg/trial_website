@@ -430,6 +430,176 @@ if (paraditBtn) {
   }
 
 });
+//muskuļi spēle
+document.addEventListener("DOMContentLoaded", async () => {
+const musclesList = [
+  { name: "Košļāšanas muskulis",                    latin: "m. masseter",                        x: 311.23, y: 129.45 },
+  { name: "Galvas grozītājmuskulis",                latin: "m. sternocleidomastoideus",          x: 281.19, y: 155.45 },
+  { name: "Trapecveida muskulis",                   latin: "m. trapezius",                       x: 345.65, y: 170.08 },
+  { name: "Delta muskulis",                         latin: "m. deltoideus",                      x: 390.85, y: 200.01 },
+  { name: "Lielais krūšu muskulis",                 latin: "m. pectoralis major",                x: 328.86, y: 221.60 },
+  { name: "Augšdelma divgalvainais muskulis",       latin: "m. biceps brachii",                  x: 392.57, y: 271.10 },
+  { name: "Spieķkaula muskulis",                    latin: "m. brachioradialis",                 x: 408.18, y: 340.96 },
+  { name: "Taisnais vēdera muskulis",               latin: "m. rectus abdominis",                x: 277.19, y: 285.21 },
+  { name: "Vēdera ārējais slīpais muskulis",        latin: "m. obliquus externus abdominis",     x: 346.35, y: 314.92 },
+  { name: "Taisnais augšstilba muskulis",           latin: "m. rectus femoris",                  x: 341.23, y: 457.29 },
+  { name: "Priekšējais lielakaula muskulis",        latin: "m. tibialis anterior",               x: 346.35, y: 613.84 },
+  { name: "Mazā lielakaula muskulis",               latin: "m. fibularis longus",                x: 231.65, y: 612.94 }
+];
+
+
+    let currentMuscleIndex = 0;
+    let scoreMuscles = 0;
+    let studyModeMuscles = false;
+
+    const musclesStartBtn    = document.getElementById('muscles-start-btn');
+    const musclesStudyBtn    = document.getElementById('muscles-study-btn');
+    const musclesEndStudyBtn = document.getElementById('muscles-end-study-btn');
+    const musclesExitBtn     = document.getElementById('muscles-exit-btn');
+    const musclesNameDiv     = document.getElementById('muscles-name');
+    const musclesGameContainer = document.getElementById('muscles-game-container');
+    const musclesScoreDiv    = document.getElementById('muscles-score');
+
+    function shuffleMuscles(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function startMusclesGame() {
+      studyModeMuscles = false;
+      shuffleMuscles(musclesList);
+      currentMuscleIndex = 0;
+      scoreMuscles = 0;
+      musclesScoreDiv.textContent = '';
+      musclesStartBtn.style.display    = 'none';
+      musclesStudyBtn.style.display    = 'none';
+      musclesEndStudyBtn.style.display = 'none';
+      musclesExitBtn.style.display     = 'inline-block';
+      showMuscle();
+    }
+
+    function showMuscle() {
+      const muscle = musclesList[currentMuscleIndex];
+      musclesNameDiv.textContent = `${muscle.name} — ${muscle.latin}`;
+      musclesGameContainer.querySelectorAll('.muscles-dot').forEach(d => d.remove());
+
+      musclesList.forEach((m, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('muscles-dot');
+        dot.style.left = m.x + 'px';
+        dot.style.top  = m.y + 'px';
+        dot.addEventListener('click', () => checkMuscleAnswer(dot, index));
+        musclesGameContainer.appendChild(dot);
+      });
+    }
+
+    function checkMuscleAnswer(dot, index) {
+      if (studyModeMuscles) return;
+      const correctIndex = currentMuscleIndex;
+      if (index === correctIndex) {
+        dot.classList.add('correct');
+        scoreMuscles++;
+      } else {
+        dot.classList.add('wrong');
+        musclesGameContainer.querySelectorAll('.muscles-dot')[correctIndex].classList.add('correct');
+      }
+      setTimeout(() => {
+        currentMuscleIndex++;
+        if (currentMuscleIndex < musclesList.length) {
+          showMuscle();
+        } else {
+          showMusclesScore();
+        }
+      }, 800);
+    }
+
+    async function showMusclesScore() {
+      musclesNameDiv.textContent = '';
+      musclesScoreDiv.textContent =
+        `Tavs rezultāts: ${scoreMuscles}/${musclesList.length} (${Math.round(scoreMuscles / musclesList.length * 100)}%)`;
+      const procenti_1 = Math.round(scoreMuscles / musclesList.length * 100);
+      try {
+        const response = await fetch("/send_result", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            rezultats: procenti_1,
+            spele: "Muskuļi",
+          })
+
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          alert("Failed to save result: " + result.error);
+        }
+      } catch (err) {
+        console.error("Failed to send result:", err);
+      }
+      musclesStartBtn.textContent     = 'Sākt spēli no sākuma';
+      musclesStartBtn.style.display   = 'inline-block';
+      musclesStudyBtn.style.display   = 'inline-block';
+      musclesExitBtn.style.display    = 'none';
+      musclesGameContainer.querySelectorAll('.muscles-dot').forEach(d => d.remove());
+    }
+
+    function startMusclesStudy() {
+      studyModeMuscles = true;
+      musclesNameDiv.textContent  = 'Nospied uz punkta, lai redzētu muskuli';
+      musclesScoreDiv.textContent = '';
+      musclesStartBtn.style.display    = 'none';
+      musclesStudyBtn.style.display    = 'none';
+      musclesEndStudyBtn.style.display = 'inline-block';
+      musclesExitBtn.style.display     = 'none';
+      musclesGameContainer.querySelectorAll('.muscles-dot').forEach(d => d.remove());
+
+      musclesList.forEach((m) => {
+        const dot = document.createElement('div');
+        dot.classList.add('muscles-dot');
+        dot.style.left = m.x + 'px';
+        dot.style.top  = m.y + 'px';
+        dot.addEventListener('click', () => {
+          musclesNameDiv.textContent = `${m.name} — ${m.latin}`;
+        });
+        musclesGameContainer.appendChild(dot);
+      });
+    }
+
+    function endMusclesStudy() {
+      studyModeMuscles = false;
+      resetMusclesMenu();
+    }
+
+    function exitMusclesGame() {
+      studyModeMuscles = false;
+      resetMusclesMenu();
+    }
+
+    function resetMusclesMenu() {
+      musclesNameDiv.textContent  = '';
+      musclesScoreDiv.textContent = '';
+      musclesGameContainer.querySelectorAll('.muscles-dot').forEach(d => d.remove());
+      musclesStartBtn.style.display    = 'inline-block';
+      musclesStudyBtn.style.display    = 'inline-block';
+      musclesEndStudyBtn.style.display = 'none';
+      musclesExitBtn.style.display     = 'none';
+    }
+
+    musclesStartBtn.addEventListener('click', startMusclesGame);
+    musclesStudyBtn.addEventListener('click', startMusclesStudy);
+    musclesEndStudyBtn.addEventListener('click', endMusclesStudy);
+    musclesExitBtn.addEventListener('click', exitMusclesGame);
+  });
+
+
+
+
+
+
+
 ///hides stuff at login page
 document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("/check_login",{
