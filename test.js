@@ -498,6 +498,10 @@ const musclesList = [
       musclesStudyBtn.style.display    = 'inline-block';
       musclesEndStudyBtn.style.display = 'none';
       musclesExitBtn.style.display     = 'none';
+      musclesScoreDiv.style.display = "none";
+      //brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+      musclesScoreDiv.classList.remove("show");
+      musclesScoreDiv.textContent = '';
     }
 
     musclesStartBtn.addEventListener('click', startMusclesGame);
