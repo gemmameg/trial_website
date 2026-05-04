@@ -563,7 +563,7 @@ function startGameOrgans() {
   scoreDivOrgans.textContent = '';
 
   startBtnOrgans.style.display = 'none';
-  //brum brum?
+
   studyBtnOrgans.style.display = 'none';
   endStudyBtnOrgans.style.display = 'none';
   exitBtnOrgans.style.display = 'inline-block';
@@ -642,7 +642,7 @@ async function showScoreOrgans() {
         console.error("Failed to send result:", err);
       }
   
-
+//brum brum here
   startBtnOrgans.style.display = 'none';
   studyBtnOrgans.style.display = 'none';
   exitBtnOrgans.style.display = 'inline-block';
