@@ -615,7 +615,9 @@ function checkAnswerOrgans(dot, index) {
 
 async function showScoreOrgans() {
   organNameDivOrgans.textContent = '';
-
+  //rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+  scoreDivOrgans.style.display = "block";
+  scoreDivOrgans.classList.add("show");
   scoreDivOrgans.textContent =
     `Tavs rezultāts: ${scoreOrgans}/${organsData.length} (${Math.round(scoreOrgans / organsData.length * 100)}%)`;
       const procenti_2 = Math.round(scoreOrgans / organsData.length * 100);
