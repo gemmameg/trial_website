@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
          `;
 
          tbody.appendChild(row);
-          );
+       } );
 
          document.getElementById("results-table").style.display = "table";
       }
