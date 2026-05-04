@@ -118,15 +118,24 @@ document.addEventListener("DOMContentLoaded", () => {
   
   if (paraditBtn) {
     paraditBtn.addEventListener("click", async () => {
-      const response = await fetch("/paradit_rez",{method: "GET",
-      credentials: "include"});
+   //   const response = await fetch("/paradit_rez",{method: "GET",
+   //   credentials: "include"});
 
-      const result = await response.json();
+   //   const result = await response.json();
 
-      if (!result.ok) {
-        alert(result.error);
-      }
+    //  if (!result.ok) {
+      //  alert(result.error);
+     // }
+ const result = {
+      ok: true,
+      rezultati: [
+        [85, "Muskuļi", 1],
+        [70, "Kauli", 2],
+        [90, "Orgāni", 3]
+      ]
+    };
 
+      //rreal part starts back
       if (result.ok) {
        const tbody = document.querySelector("#results-table tbody");
 
