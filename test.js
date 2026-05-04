@@ -449,7 +449,7 @@ const musclesList = [
         console.error("Failed to send result:", err);
       }
       //brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
-      musclesStartBtn.textContent     = 'Sākt spēli no sākuma';
+     
       musclesStartBtn.style.display   = 'none';
       musclesStudyBtn.style.display   = 'none';
       musclesExitBtn.style.display    = 'inline-block';
