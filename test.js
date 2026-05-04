@@ -128,19 +128,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (result.ok) {
-        let text = "";
-        result.rezultati.forEach(r => {
-          text += `
-            <div>
-              Spēle: ${r[1]} <br>
-              Mēģinājums: ${r[2]} <br>
-              Rezultāts: ${r[0]}%
-            </div><br>
-          `;
-        });
+       const tbody = document.querySelector("#results-table tbody");
 
-        const output = document.getElementById("paradit_button");
-        if (output) output.innerHTML = text;
+       tbody.innerHTML = "";
+
+       result.rezultati.forEach(r => {
+       const row = document.createElement("tr");
+
+        row.innerHTML = `
+        <td>${r[1]}</td>
+        <td>${r[2]}</td>
+        <td>${r[0]}%</td>
+         `;
+
+         tbody.appendChild(row);
+          );
+
+         document.getElementById("results-table").style.display = "table";
       }
     });
   }
