@@ -390,8 +390,12 @@ const musclesList = [
       musclesList.forEach((m, index) => {
         const dot = document.createElement('div');
         dot.classList.add('muscles-dot');
-        dot.style.left = m.x + 'px';
-        dot.style.top  = m.y + 'px';
+        //change hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+       const BASE_WIDTH = 559;
+       const BASE_HEIGHT = 791;
+
+       dot.style.left = (m.x / BASE_WIDTH * 100) + '%';
+       dot.style.top  = (m.y / BASE_HEIGHT * 100) + '%';
         dot.addEventListener('click', () => checkMuscleAnswer(dot, index));
         musclesGameContainer.appendChild(dot);
       });
@@ -461,8 +465,12 @@ const musclesList = [
       musclesList.forEach((m) => {
         const dot = document.createElement('div');
         dot.classList.add('muscles-dot');
-        dot.style.left = m.x + 'px';
-        dot.style.top  = m.y + 'px';
+        //change hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+        const BASE_WIDTH = 559;
+        const BASE_HEIGHT = 791;
+
+        dot.style.left = (m.x / BASE_WIDTH * 100) + '%';
+        dot.style.top  = (m.y / BASE_HEIGHT * 100) + '%';
         dot.addEventListener('click', () => {
           musclesNameDiv.textContent = `${m.name} — ${m.latin}`;
         });
