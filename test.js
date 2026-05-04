@@ -563,6 +563,7 @@ function startGameOrgans() {
   scoreDivOrgans.textContent = '';
 
   startBtnOrgans.style.display = 'none';
+  //brum brum?
   studyBtnOrgans.style.display = 'none';
   endStudyBtnOrgans.style.display = 'none';
   exitBtnOrgans.style.display = 'inline-block';
@@ -640,11 +641,11 @@ async function showScoreOrgans() {
       } catch (err) {
         console.error("Failed to send result:", err);
       }
-  startBtnOrgans.textContent = "Sākt spēli no sākuma";
+  
 
-  startBtnOrgans.style.display = 'inline-block';
-  studyBtnOrgans.style.display = 'inline-block';
-  exitBtnOrgans.style.display = 'none';
+  startBtnOrgans.style.display = 'none';
+  studyBtnOrgans.style.display = 'none';
+  exitBtnOrgans.style.display = 'inline-block';
 }
 
 // STUDY MODE
@@ -691,7 +692,11 @@ function exitGameOrgans() {
 function resetToMenuOrgans() {
   organNameDivOrgans.textContent = '';
   scoreDivOrgans.textContent = '';
-
+// brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+   scoreDivOrgans.textContent = '';
+  scoreDivOrgans.style.display = "none";
+  scoreDivOrgans.classList.remove("show");
+  
   gameContainerOrgans.querySelectorAll('.dot-organs').forEach(dot => dot.remove());
 
   startBtnOrgans.style.display = 'inline-block';
