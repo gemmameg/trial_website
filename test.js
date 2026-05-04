@@ -72,7 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
-      const response = await fetch("/log_out", { method: "POST", credentials: "include" });
+      const response = await fetch("/log_out", 
+        { method: "POST", credentials: "include" });
       const result = await response.json();
 
       if (result.ok) {
@@ -80,9 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         location.reload();
       } else {
         alert("Logout failed");
-      }
-    });
-  }
+      }});}
 
   // ---------------- CHANGE PASSWORD ----------------
   const changeForm = document.getElementById("change_password");
@@ -114,136 +113,38 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // ---------------- SEND RESULT ----------------
-  //if (rezultatsForm) {
-    //rezultatsForm.onsubmit = async (e) => {
-      //e.preventDefault();
-
-      //const rezultats = document.getElementById("rezultats");
-
-      //const response = await fetch("/send_result", {
-        //method: "POST",
-        //headers: { "Content-Type": "application/json" },
-        //body: JSON.stringify({
-          //rezultats: rezultats?.value
-        //})
-      //});
-
-      //const result = await response.json();
-
-      //if (response.ok) {
-        //alert("Rezultāts saglabāts!");
-      //} else {
-        //alert(result.error);
-      //}
-    //};
-  //}
   // ---------------- SHOW RESULTS ----------------
- // const paraditBtn = document.getElementById("paradit_rez");
+  const paraditBtn = document.getElementById("paradit_rez");
   
-  //if (paraditBtn) {
-    //paraditBtn.addEventListener("click", async () => {
-      //const response = await fetch("/paradit_rez",{method: "GET",
-      //credentials: "include"});
+  if (paraditBtn) {
+    paraditBtn.addEventListener("click", async () => {
+      const response = await fetch("/paradit_rez",{method: "GET",
+      credentials: "include"});
 
-      //const result = await response.json();
+      const result = await response.json();
 
-      //if (!result.ok) {
-        //alert(result.error);
-      //}
+      if (!result.ok) {
+        alert(result.error);
+      }
 
-      //if (result.ok) {
-        //let text = "";
-        //result.rezultati.forEach(r => {
-          //text += `
-            //<div>
-              //Spēle: ${r[1]} <br>
-              //Mēģinājums: ${r[2]} <br>
-              //Rezultāts: ${r[0]}%
-            //</div><br>
-          //`;
-        //});
+      if (result.ok) {
+        let text = "";
+        result.rezultati.forEach(r => {
+          text += `
+            <div>
+              Spēle: ${r[1]} <br>
+              Mēģinājums: ${r[2]} <br>
+              Rezultāts: ${r[0]}%
+            </div><br>
+          `;
+        });
 
-        //const output = document.getElementById("paradit_button");
-        //if (output) output.innerHTML = text;
-      //}
-    //});
- // }
-// fake code-------------------------------------
-  
- const paraditBtn = document.getElementById("paradit_rez");
-const table = document.getElementById("results-table");
-
-let isVisible = false;
-let dataLoaded = false;
-
-if (paraditBtn) {
-  paraditBtn.addEventListener("click", async () => {
-    
-    // 🔁 Toggle OFF (hide)
-    if (isVisible) {
-      table.style.display = "none";
-      paraditBtn.textContent = "Parādīt manus rezultātus";
-      isVisible = false;
-      return;
-    }
-
-    // 🔁 Toggle ON (show)
-    table.style.display = "table";
-    paraditBtn.textContent = "Paslēpt manus rezultātus";
-    isVisible = true;
-
-    // 📦 Load data only once
-    if (dataLoaded) return;
-
-    let result;
-
-    try {
-      const response = await fetch("/paradit_rez", {
-        method: "GET",
-        credentials: "include"
-      });
-
-      if (!response.ok) throw new Error("Server error");
-
-      result = await response.json();
-
-    } catch (err) {
-      console.log("Using fake data");
-
-      result = {
-        ok: true,
-        rezultati: [
-          [100, "Test User", "Demo"],
-          [85, "Jane", "English"],
-          [67, "Mark", "History"]
-        ]
-      };
-    }
-
-    if (!result.ok) {
-      alert(result.error);
-      return;
-    }
-
-    const tbody = document.querySelector("#results-table tbody");
-    tbody.innerHTML = "";
-
-    result.rezultati.forEach(r => {
-      const row = document.createElement("tr");
-
-      row.innerHTML = `
-        <td>${r[0]}%</td>
-        <td>${r[1]}</td>
-        <td>${r[2]}</td>
-      `;
-
-      tbody.appendChild(row);
+        const output = document.getElementById("paradit_button");
+        if (output) output.innerHTML = text;
+      }
     });
+  }
 
-    dataLoaded = true;
-  });
-}
   // ---------------- GAME ----------------
   const startBtn = document.getElementById('start-btn');
   const studyBtn = document.getElementById('study-btn');
@@ -430,6 +331,7 @@ if (paraditBtn) {
   }
 
 });
+
 //muskuļi spēle
 document.addEventListener("DOMContentLoaded", async () => {
 const musclesList = [
@@ -596,7 +498,11 @@ const musclesList = [
 
 
 
-// Orgānu spēle
+
+
+
+
+  // Orgānu spēle
   document.addEventListener("DOMContentLoaded", async () => {
 const organsData = [
   {name: "Smadzenes", latin: "Encephalon", x: 192, y: 28},
@@ -783,8 +689,6 @@ studyBtnOrgans.addEventListener('click', startStudyOrgans);
 endStudyBtnOrgans.addEventListener('click', endStudyOrgans);
 exitBtnOrgans.addEventListener('click', exitGameOrgans);
   });
-
-
 
 
 
