@@ -448,10 +448,11 @@ const musclesList = [
       } catch (err) {
         console.error("Failed to send result:", err);
       }
+      //brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
       musclesStartBtn.textContent     = 'Sākt spēli no sākuma';
-      musclesStartBtn.style.display   = 'inline-block';
-      musclesStudyBtn.style.display   = 'inline-block';
-      musclesExitBtn.style.display    = 'none';
+      musclesStartBtn.style.display   = 'none';
+      musclesStudyBtn.style.display   = 'none';
+      musclesExitBtn.style.display    = 'inline-block';
       musclesGameContainer.querySelectorAll('.muscles-dot').forEach(d => d.remove());
     }
 
