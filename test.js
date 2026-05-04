@@ -423,6 +423,9 @@ const musclesList = [
 
     async function showMusclesScore() {
       musclesNameDiv.textContent = '';
+      //change hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+      musclesScoreDiv.style.display = "block";
+      musclesScoreDiv.classList.add("show");
       musclesScoreDiv.textContent =
         `Tavs rezultāts: ${scoreMuscles}/${musclesList.length} (${Math.round(scoreMuscles / musclesList.length * 100)}%)`;
       const procenti_1 = Math.round(scoreMuscles / musclesList.length * 100);
