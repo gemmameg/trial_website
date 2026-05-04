@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         [90, "Orgāni", 3]
       ]
     };
- console.log("CLICK WORKED");
+
       //rreal part starts back
       if (result.ok) {
        const tbody = document.querySelector("#results-table tbody");
